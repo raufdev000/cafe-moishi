@@ -440,6 +440,11 @@ const a = {
         o.set(r[l], {
             opacity: 1
         });
+        if (T.isPortraitDevice()) {
+            r.forEach((frame, fi) => {
+                frame.style.display = fi <= 1 ? "" : "none"
+            })
+        }
         const d = window.innerWidth;
         o.set(e, {
             background: "linear-gradient(108deg, #222944 15%, #465077 100%)"
@@ -466,6 +471,18 @@ const a = {
             })
         }
         );
+        if (T.isPortraitDevice()) {
+            let lastVisibleIdx = 1;
+            a.tlMoon.eventCallback("onUpdate", () => {
+                const idx = Math.round(a.tlMoon.progress() * (r.length - 1));
+                if (idx === lastVisibleIdx)
+                    return;
+                lastVisibleIdx = idx;
+                r.forEach((frame, fi) => {
+                    frame.style.display = Math.abs(fi - idx) <= 1 ? "" : "none"
+                })
+            })
+        }
         const f = o.quickTo(a.tlMoon, "progress", {
             duration: .4,
             ease: "power2.out"
