@@ -557,7 +557,7 @@ const a = {
                     trigger: ".home-hero",
                     start: "top top",
                     end: "bottom bottom",
-                    scrub: !0,
+                    scrub: T.isPortraitDevice() ? .3 : !0,
                     invalidateOnRefresh: !0,
                     onUpdate: y => {
                         const f = y.progress
