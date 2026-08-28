@@ -560,6 +560,12 @@ const a = {
                     scrub: T.isPortraitDevice() ? .3 : !0,
                     invalidateOnRefresh: !0,
                     onUpdate: y => {
+                        if (T.isPortraitDevice()) {
+                            const now = performance.now();
+                            if (a._lastFrameTime && now - a._lastFrameTime < 45)
+                                return;
+                            a._lastFrameTime = now
+                        }
                         const f = y.progress
                           , h = Math.max(0, (f - s) / (1 - s));
                         if (f < s)
