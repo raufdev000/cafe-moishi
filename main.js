@@ -40,7 +40,8 @@ const q = {
             wheelMultiplier: 1,
             touchMultiplier: 2,
             normalizeWheel: !0,
-            anchors: !0
+            anchors: !0,
+            smoothTouch: !0
         }),
         this.lenis.on("scroll", g.update),
         o.ticker.add(e => {

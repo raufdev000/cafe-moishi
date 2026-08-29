@@ -1,505 +1,1491 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cafe Moishi — Qawwali Night</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Fredoka:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<html lang="it">
+    <head>
+        <title>Contact — Mùn Rooftop Cocktail Bar Rome</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+  :root{
+    --void:#040705;
+    --smoke:#0b110d;
+    --cream:#f1faf3;
+    --cream-dim: rgba(241,250,243,0.62);
+    --accent: #1e4730;
+    --accent-light: #b6ffd9;
+    --accent-dark: #0e6b3d;
+    --accent-glow: rgba(43,232,124,0.55);
+    --line: rgba(43,232,124,0.9);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 700px 500px at 10% -5%, rgba(30,150,90,0.32), transparent 60%),
+      radial-gradient(ellipse 500px 400px at 90% 20%, rgba(20,120,75,0.22), transparent 55%),
+      var(--void);
+    font-family:'Poppins', sans-serif;
+  }
+
+  /* ===== NAVBAR (classic / desktop-first) ===== */
+  .site-nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 48px;
+    background: linear-gradient(180deg, rgba(5,8,6,0.88) 0%, rgba(5,8,6,0.6) 100%);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    border-bottom: 1px solid rgba(43,232,124,0.16);
+  }
+
+  .site-nav::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse 320px 70px at 12% 40%, rgba(43,232,124,0.08), transparent 70%),
+      radial-gradient(ellipse 260px 60px at 65% 60%, rgba(43,232,124,0.06), transparent 70%);
+    animation: driftSmoke 15s ease-in-out infinite alternate;
+    pointer-events:none;
+  }
+  @keyframes driftSmoke{
+    0%{ transform: translateX(-18px); }
+    100%{ transform: translateX(18px); }
+  }
+
+  .site-nav::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:1px;
+    background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+    filter: blur(0.5px);
+  }
+
+  /* ---- Logo ---- */
+  .site-logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    z-index:2;
+    cursor:pointer;
+    text-decoration:none;
+    transition: transform 0.35s cubic-bezier(.2,.9,.3,1);
+  }
+  .site-logo:hover{ transform: translateY(-1px); }
+  .site-logo .mark{
+    position:relative; width:26px; height:26px; flex-shrink:0;
+    transition: transform 0.45s cubic-bezier(.2,.9,.3,1), filter 0.35s ease;
+  }
+  .site-logo .mark svg{ width:100%; height:100%; display:block; }
+  .site-logo:hover .mark{ transform: scale(1.12) rotate(-4deg); filter: drop-shadow(0 0 8px var(--accent-glow)); }
+  .site-logo .wordmark{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:21px;
+    letter-spacing:0.12em;
+    color: var(--cream);
+    text-transform:uppercase;
+    transition: text-shadow 0.35s ease;
+  }
+  .site-logo:hover .wordmark{ text-shadow: 0 0 14px var(--accent-glow); }
+  .site-logo .wordmark span{ color: var(--accent); font-weight:600; }
+
+  /* ---- Classic inline links (desktop) ---- */
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    list-style:none;
+    z-index:2;
+  }
+  .nav-links li a{
+    position:relative;
+    display:inline-block;
+    text-decoration:none;
+    color: var(--cream-dim);
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    padding-bottom:8px;
+    transition: color 0.35s ease, transform 0.35s cubic-bezier(.2,.9,.3,1), text-shadow 0.35s ease;
+  }
+  .nav-links li a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:100%; height:1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(.2,.9,.3,1);
+  }
+  .nav-links li a:hover{ color: var(--cream); text-shadow: 0 0 12px var(--accent-glow); transform: translateY(-2px); }
+  .nav-links li a:hover::after{ transform: scaleX(1); }
+  .nav-links li a.active{ color: var(--accent); }
+  .nav-links li a.active::after{ transform: scaleX(1); }
+
+  /* ---- Find Us (small map popover) ---- */
+  .nav-location{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    color: var(--cream-dim);
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    transition: color 0.3s ease;
+  }
+  .nav-location svg{ width:14px; height:14px; opacity:0.85; flex-shrink:0; transition: transform 0.35s cubic-bezier(.2,.9,.3,1), filter 0.35s ease; }
+  .nav-location:hover, .nav-location.open{ color: var(--cream); }
+  .nav-location:hover svg, .nav-location.open svg{ filter: drop-shadow(0 0 6px var(--accent-glow)); transform: scale(1.15) translateY(-1px); }
+
+  .location-popover{
+    position:absolute;
+    top:calc(100% + 20px);
+    left:50%;
+    width:236px;
+    padding:10px;
+    background: linear-gradient(165deg, rgba(9,14,11,0.98), rgba(5,8,6,0.98));
+    border:1px solid rgba(43,232,124,0.22);
+    border-radius:8px;
+    box-shadow: 0 20px 50px -12px rgba(0,0,0,0.65);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform: translateX(-50%) translateY(-8px) scale(0.96);
+    transform-origin: top center;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.2,.9,.3,1), visibility 0s linear 0.35s;
+    z-index:50;
+  }
+  .location-popover::before{
+    content:"";
+    position:absolute;
+    top:-6px; left:50%;
+    width:12px; height:12px;
+    transform: translateX(-50%) rotate(45deg);
+    background: rgba(9,14,11,0.98);
+    border-left:1px solid rgba(43,232,124,0.22);
+    border-top:1px solid rgba(43,232,124,0.22);
+  }
+  .nav-location:hover .location-popover,
+  .nav-location.open .location-popover{
+    opacity:1; visibility:visible; pointer-events:auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.2,.9,.3,1), visibility 0s linear 0s;
+  }
+  .location-popover iframe{
+    width:100%; height:128px; border:0; border-radius:5px; display:block;
+    filter: grayscale(25%) contrast(1.05) brightness(0.9);
+  }
+  .location-popover .location-address{
+    font-size:11px; line-height:1.5; letter-spacing:0.03em;
+    color: var(--cream-dim); text-transform:none; margin-top:9px;
+  }
+  .location-popover .location-link{
+    display:inline-block; margin-top:7px;
+    font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color: var(--accent); text-decoration:none; transition: text-shadow 0.3s ease;
+  }
+  .location-popover .location-link:hover{ text-shadow: 0 0 10px var(--accent-glow); }
+
+  /* ---- Right cluster (links + location + cta) ---- */
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:38px;
+    z-index:2;
+  }
+
+  /* ---- CTA button ---- */
+  .nav-cta{
+    position:relative;
+    padding:11px 26px;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color: var(--void);
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border:none;
+    border-radius:3px;
+    cursor:pointer;
+    overflow:hidden;
+    transition: transform 0.3s cubic-bezier(.2,.9,.3,1), box-shadow 0.3s ease, letter-spacing 0.3s ease;
+  }
+  .nav-cta:hover{ transform: translateY(-3px) scale(1.03); box-shadow: 0 10px 28px -6px var(--accent-glow); letter-spacing: 0.24em; }
+  .nav-cta:active{ transform: translateY(-1px) scale(0.99); }
+  .nav-cta::before{
+    content:"";
+    position:absolute;
+    top:0; left:-60%; width:40%; height:100%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+  .nav-cta:hover::before{ left:130%; }
+
+  /* ===== Mobile burger ===== */
+  .nav-burger{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    width:30px;
+    height:24px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    z-index:210;
+    position:relative;
+  }
+  .nav-burger span{
+    width:100%; height:1px;
+    background: var(--cream);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(.2,.9,.3,1), opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .nav-burger:hover span{ background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+  .nav-burger.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2){ opacity:0; }
+  .nav-burger.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+  /* ===== Fullscreen mobile menu ===== */
+  .mobile-menu{
+    display:none;
+    list-style:none;
+  }
+
+  @media (max-width: 860px){
+    .site-nav{ padding:16px 22px; }
+    .nav-links{ display:none; }
+    .nav-location{ display:none; }
+    .nav-cta{ display:none; }
+    .nav-burger{ display:flex; }
+
+    .mobile-menu{
+      display:flex;
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100dvh;
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+      gap:24px;
+      padding:0 12vw;
+      background:
+        radial-gradient(ellipse 500px 400px at 90% -10%, rgba(43,232,124,0.12), transparent 60%),
+        linear-gradient(165deg, rgba(5,8,6,0.99), rgba(12,18,14,0.99));
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      z-index:200;
+      clip-path: circle(2.5% at calc(100% - 37px) 33px);
+      opacity:0;
+      visibility:hidden;
+      transition:
+        clip-path 0.7s cubic-bezier(.2,.9,.15,1),
+        opacity 0.35s ease,
+        visibility 0s linear 0.7s;
+    }
+    .mobile-menu.open{
+      clip-path: circle(150% at calc(100% - 37px) 33px);
+      opacity:1;
+      visibility:visible;
+      transition:
+        clip-path 0.7s cubic-bezier(.2,.9,.15,1),
+        opacity 0.3s ease,
+        visibility 0s linear 0s;
+    }
+
+    .mobile-menu li{ overflow:hidden; }
+    .mobile-menu li a{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      font-size:26px;
+      letter-spacing:0.03em;
+      font-family:'Poppins', sans-serif;
+      font-weight:600;
+      color: var(--cream-dim);
+      text-transform:uppercase;
+      opacity:0;
+      transform: translateY(28px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.2,.9,.3,1), color 0.3s ease, letter-spacing 0.3s ease;
+    }
+    .mobile-menu li a:hover{ color: var(--cream); letter-spacing: 0.08em; text-shadow: 0 0 14px var(--accent-glow); }
+    .mobile-menu li a.active{ color: var(--accent); }
+    .mobile-menu.open li a{ opacity:1; transform: translateY(0); }
+    .mobile-menu.open li:nth-child(1) a{ transition-delay:0.28s; }
+    .mobile-menu.open li:nth-child(2) a{ transition-delay:0.36s; }
+    .mobile-menu.open li:nth-child(3) a{ transition-delay:0.44s; }
+    .mobile-menu.open li:nth-child(4) a{ transition-delay:0.52s; }
+    .mobile-menu.open li:nth-child(5) a{ transition-delay:0.60s; }
+    .mobile-menu.open li:nth-child(6) a{ transition-delay:0.68s; }
+
+    .mobile-menu .mobile-location svg{ width:20px; height:20px; }
+
+    .mobile-menu .mobile-cta{
+      margin-top:8px;
+      padding:13px 30px;
+      font-size:12px;
+      font-weight:600;
+      font-family:'Poppins', sans-serif;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color: var(--void);
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border-radius:3px;
+      display:inline-block;
+      transition: transform 0.3s cubic-bezier(.2,.9,.3,1), box-shadow 0.3s ease;
+    }
+    .mobile-menu .mobile-cta:hover{
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 26px -6px var(--accent-glow);
+      letter-spacing: 0.24em;
+    }
+    .mobile-menu .mobile-location{
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.2,.9,.3,1), color 0.3s ease, gap 0.3s ease;
+    }
+    .mobile-menu .mobile-location:hover{ gap:14px; }
+    .mobile-menu .mobile-location svg{ transition: filter 0.3s ease, transform 0.3s ease; }
+    .mobile-menu .mobile-location:hover svg{ filter: drop-shadow(0 0 8px var(--accent-glow)); transform: scale(1.1); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .mobile-menu, .mobile-menu li a, .location-popover{ transition-duration: 0.01ms !important; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<style>
+/* ================================================================
+   CONTACT PAGE — STYLES (Cafe Moishi)
+   Two type roles only, matched to the rest of the site:
+   Cormorant Garamond (headlines) + Jost (everything else)
+   ================================================================ */
+
+.contact-mun {
+    --void: #040705;
+    --cream: #f1faf3;
+    --cream-dim: rgba(241,250,243,0.62);
+    --cream-faint: rgba(241,250,243,0.38);
+    --accent: #1e4730;
+    --accent-bright: #3c8a5c;
+    --accent-line: rgba(30,71,48,0.9);
+    --accent-glow: rgba(60,138,92,0.5);
+    --card-bg: rgba(241,250,243,0.03);
+    --card-border: rgba(241,250,243,0.1);
+
+    position: relative;
+    overflow: hidden;
+    background: var(--void);
+    color: var(--cream);
+    padding: clamp(6rem, 12vw, 9rem) clamp(1.5rem, 6vw, 6rem) clamp(4rem, 8vw, 6rem);
+
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(.2,.7,.2,1);
+}
+.contact-mun.in-view { opacity: 1; }
+.contact-mun * { box-sizing: border-box; }
+
+.contact-mun__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+.contact-mun__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(180deg, var(--void) 0%, rgba(4,7,5,0.82) 22%, rgba(4,7,5,0.94) 100%);
+}
+
+/* ambient embers — same device used on the About section, kept subtle here */
+.contact-mun__embers { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.contact-mun__ember {
+    position: absolute;
+    bottom: -4%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent-bright);
+    box-shadow: 0 0 6px 1px var(--accent-glow);
+    opacity: 0;
+    animation: contactMunRise linear infinite;
+}
+@keyframes contactMunRise {
+    0%   { opacity: 0; transform: translateY(0) translateX(0); }
+    8%   { opacity: .8; }
+    92%  { opacity: .5; }
+    100% { opacity: 0; transform: translateY(-110vh) translateX(var(--drift, 24px)); }
+}
+
+.contact-mun__header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto clamp(3rem, 7vw, 4.5rem);
+}
+
+.contact-mun__eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: clamp(1rem, 2.5vw, 1.4rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7em;
+}
+.contact-mun__eyebrow::before,
+.contact-mun__eyebrow::after {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--accent-line);
+}
+
+.contact-mun__headline {
+    margin: 0 0 clamp(1rem, 3vw, 1.4rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 5.4vw, 3.8rem);
+    line-height: 1.14;
+    color: var(--cream);
+}
+.contact-mun__headline em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cream-dim);
+}
+
+.contact-mun__body {
+    margin: 0 auto;
+    max-width: 52ch;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    line-height: 1.85;
+    color: var(--cream-dim);
+}
+
+/* ---- Two-column body: visit-us card | form ---- */
+
+.contact-mun__body-grid {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(280px, 380px) 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+}
+
+.contact-mun__visual {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.contact-mun__image-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--card-border);
+}
+.contact-mun__image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.9) brightness(0.9);
+    transition: transform 0.8s cubic-bezier(.2,.7,.2,1), filter 0.6s ease;
+}
+.contact-mun__image-card:hover img {
+    transform: scale(1.06);
+    filter: saturate(1) brightness(1);
+}
+.contact-mun__image-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(4,7,5,0.92) 100%);
+    pointer-events: none;
+}
+.contact-mun__image-caption {
+    position: absolute;
+    left: 1.3rem;
+    right: 1.3rem;
+    bottom: 1.2rem;
+    z-index: 2;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+}
+
+.contact-mun__facts {
+    border-radius: 14px;
+    padding: clamp(1.2rem, 2.5vw, 1.6rem);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.contact-mun__fact {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid rgba(241,250,243,0.08);
+}
+.contact-mun__fact:last-child { padding-bottom: 0; border-bottom: none; }
+.contact-mun__fact-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    flex-shrink: 0;
+}
+.contact-mun__fact-value {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 0.88rem;
+    color: var(--cream-dim);
+    text-align: right;
+}
+.contact-mun__fact-value a { color: inherit; text-decoration: none; transition: color .3s ease; }
+.contact-mun__fact-value a:hover { color: var(--cream); }
+
+/* ---- Form panel ---- */
+
+.contact-mun__form-wrap {
+    position: relative;
+    border-radius: 18px;
+    padding: clamp(1.8rem, 4vw, 2.8rem);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    overflow: hidden;
+}
+
+/* small decorative accent photo tucked in the form panel's corner */
+.contact-mun__form-accent {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: clamp(90px, 16vw, 150px);
+    aspect-ratio: 1;
+    border-radius: 0 18px 0 24px;
+    overflow: hidden;
+    opacity: 0.5;
+    pointer-events: none;
+}
+.contact-mun__form-accent img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.85) brightness(0.7);
+}
+.contact-mun__form-accent::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(225deg, transparent 30%, var(--void) 95%);
+}
+
+.contact-mun__form-title {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+    line-height: 1.42;
+    color: var(--cream);
+    margin-bottom: clamp(1.4rem, 3vw, 2rem);
+    max-width: 65%;
+}
+
+@media (max-width: 560px) {
+    .contact-mun__form-title { max-width: 100%; }
+}
+
+.contact-mun__form {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem 1.2rem;
+}
+.contact-mun__field { display: flex; flex-direction: column; gap: 0.55rem; }
+.contact-mun__field--full { grid-column: 1 / -1; }
+
+.contact-mun__field label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+}
+
+.contact-mun__field input,
+.contact-mun__field textarea {
+    width: 100%;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    color: var(--cream) !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--card-border) !important;
+    border-radius: 0 !important;
+    padding: 0.6rem 0.1rem;
+    transition: border-color 0.35s ease;
+}
+.contact-mun__field input::placeholder,
+.contact-mun__field textarea::placeholder {
+    color: var(--cream-faint) !important;
+    font-weight: 300;
+    letter-spacing: 0.015em;
+    opacity: 0.85;
+}
+.contact-mun__field input:focus,
+.contact-mun__field textarea:focus { border-color: var(--accent-bright) !important; }
+.contact-mun__field textarea { resize: vertical; min-height: 90px; }
+
+.contact-mun__submit-row {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.6rem;
+}
+.contact-mun__submit-note {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    color: var(--cream-faint);
+    max-width: 32ch;
+}
+
+.contact-mun__cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.9em 2em;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--void);
+    background: linear-gradient(135deg, var(--accent-bright), #a9e6c2);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, letter-spacing .3s ease;
+}
+.contact-mun__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -10px var(--accent-glow);
+    letter-spacing: 0.22em;
+}
+.contact-mun__cta::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: skewX(-20deg);
+    transition: left .6s ease;
+}
+.contact-mun__cta:hover::before { left: 130%; }
+
+@media (max-width: 780px) {
+    .contact-mun__body-grid { grid-template-columns: 1fr; }
+    .contact-mun__form { grid-template-columns: 1fr; }
+}
+
+/* scroll-reveal, same device used across the site */
+.contact-mun__reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.contact-mun__body-grid.in-view .contact-mun__reveal { opacity: 1; transform: translateY(0); }
+.contact-mun__body-grid.in-view .contact-mun__reveal:nth-of-type(1) { transition-delay: .05s; }
+.contact-mun__body-grid.in-view .contact-mun__reveal:nth-of-type(2) { transition-delay: .18s; }
+
+/* ================================================================
+   MAP SECTION
+   ================================================================ */
+
+.contact-map {
+    --void: #040705;
+    --cream: #f1faf3;
+    --cream-dim: rgba(241,250,243,0.62);
+    --accent-bright: #3c8a5c;
+    --accent-glow: rgba(60,138,92,0.5);
+    --card-border: rgba(241,250,243,0.1);
+
+    position: relative;
+    background: var(--void);
+    color: var(--cream);
+    padding: 0 0 clamp(5rem, 10vw, 7rem);
+}
+.contact-map * { box-sizing: border-box; }
+
+.contact-map__header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto clamp(2.5rem, 6vw, 3.5rem);
+    padding: 0 clamp(1.5rem, 6vw, 3rem);
+
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.contact-map__header.in-view { opacity: 1; transform: translateY(0); }
+
+.contact-map__eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 0.6rem;
+}
+.contact-map__title {
+    margin: 0 0 0.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4.2vw, 2.8rem);
+    color: var(--cream);
+}
+.contact-map__body {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--cream-dim);
+}
+
+.contact-map__frame {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 6vw, 3rem);
+}
+
+.contact-map__inner {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    aspect-ratio: 16 / 7;
+
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
+}
+.contact-map__inner.in-view { opacity: 1; transform: translateY(0) scale(1); }
+
+@media (max-width: 700px) {
+    .contact-map__inner { aspect-ratio: 4 / 5; }
+}
+
+.contact-map__inner iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    filter: grayscale(35%) contrast(1.05) brightness(0.75) saturate(1.1);
+}
+
+/* small polaroid-style photo overlapping the map's corner — 4th image on the page */
+.contact-map__photo {
+    position: absolute;
+    left: clamp(1.5rem, 4vw, 2.5rem);
+    bottom: clamp(1.5rem, 4vw, 2.5rem);
+    width: clamp(120px, 18vw, 190px);
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(241,250,243,0.25);
+    box-shadow: 0 20px 45px -14px rgba(0,0,0,0.75);
+    z-index: 2;
+}
+.contact-map__photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.9) brightness(0.85); }
+.contact-map__photo span {
+    position: absolute;
+    left: 0.7rem; right: 0.7rem; bottom: 0.6rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+}
+.contact-map__photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(4,7,5,0.85) 100%);
+}
+
+@media (max-width: 560px) {
+    .contact-map__photo { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-mun { opacity: 1 !important; transition: none !important; }
+    .contact-mun__reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .contact-mun__ember { animation: none !important; display: none; }
+    .contact-map__header,
+    .contact-map__inner { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+</style>
+    </head>
+    <body class="page-contact wp-singular page page-id-3 wp-theme-sim-base chrome">
+
+<nav class="site-nav">
+  <a href="#" class="site-logo">
+    <span class="mark">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4C20 4 13 12 13 19a7 7 0 0 0 14 0c0-7-7-15-7-15Z" stroke="#2be87c" stroke-width="1.3" fill="rgba(43,232,124,0.12)"/>
+        <path d="M20 19c0 4 3 6 3 10a3 3 0 0 1-6 0c0-2 1-3 1-3" stroke="#2be87c" stroke-width="1" opacity="0.6"/>
+      </svg>
+    </span>
+    <span class="wordmark">Cafe Moishi</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Menu</a></li>
+    <li><a href="#" class="active">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="nav-location" id="locationTrigger">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22s7-7.16 7-12.5A7 7 0 0 0 5 9.5C5 14.84 12 22 12 22Z" stroke="#2be87c" stroke-width="1.3"/>
+        <circle cx="12" cy="9.5" r="2.4" stroke="#2be87c" stroke-width="1.3"/>
+      </svg>
+      <span>Find Us</span>
+
+      <div class="location-popover">
+        <iframe
+          src="https://www.google.com/maps?q=Times+Square,New+York,NY&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <p class="location-address">Noir Lounge — 123 Ember Street, Downtown</p>
+        <a class="location-link" href="https://maps.google.com/?q=Times+Square,New+York,NY" target="_blank" rel="noopener">Get Directions →</a>
+      </div>
+    </div>
+
+    <button class="nav-cta">Book a Table</button>
+  </div>
+
+  <button class="nav-burger" id="burgerBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="mobile-menu" id="mobileMenu">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Menu</a></li>
+    <li><a href="#" class="active">Contact</a></li>
+    <li>
+      <a href="https://maps.google.com/?q=Times+Square,New+York,NY" target="_blank" rel="noopener" class="mobile-location">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22s7-7.16 7-12.5A7 7 0 0 0 5 9.5C5 14.84 12 22 12 22Z" stroke="#2be87c" stroke-width="1.3"/>
+          <circle cx="12" cy="9.5" r="2.4" stroke="#2be87c" stroke-width="1.3"/>
+        </svg>
+        Find Us
+      </a>
+    </li>
+    <li><a href="#" class="mobile-cta">Book a Table</a></li>
+  </ul>
+</nav>
+
+<main>
+
+    <section class="contact-mun" id="contact">
+        <img class="contact-mun__bg" src="Golden Smoke — Abstract Luxury Mood.webp" alt="" loading="lazy">
+        <div class="contact-mun__scrim"></div>
+
+        <div class="contact-mun__embers" aria-hidden="true">
+            <span class="contact-mun__ember" style="left:10%; --drift:20px;  animation-duration:9s;  animation-delay:0s;"></span>
+            <span class="contact-mun__ember" style="left:26%; --drift:-16px; animation-duration:11s; animation-delay:2.2s;"></span>
+            <span class="contact-mun__ember" style="left:44%; --drift:14px;  animation-duration:8.5s; animation-delay:4.4s;"></span>
+            <span class="contact-mun__ember" style="left:62%; --drift:-22px; animation-duration:10.5s; animation-delay:1.4s;"></span>
+            <span class="contact-mun__ember" style="left:78%; --drift:16px;  animation-duration:9.5s;  animation-delay:3.4s;"></span>
+            <span class="contact-mun__ember" style="left:92%; --drift:-14px; animation-duration:12s;  animation-delay:5.6s;"></span>
+        </div>
+
+        <div class="contact-mun__header">
+            <span class="contact-mun__eyebrow">Get In Touch</span>
+            <h1 class="contact-mun__headline">Come find us,<br><em>or leave a word first.</em></h1>
+            <p class="contact-mun__body">
+                For reservations, private events, or anything else — the terrace is easiest to reach directly.
+                Fill in the form, or use the details alongside it.
+            </p>
+        </div>
+
+        <div class="contact-mun__body-grid" id="contactGrid">
+
+            <div class="contact-mun__visual contact-mun__reveal">
+                <div class="contact-mun__image-card">
+                    <img src="Home Bar - Shop Luxury Home Barware & Glassware Online in India.jpg" alt="The Mùn bar, glassware ready for the evening">
+                    <span class="contact-mun__image-caption">Ready before golden hour.</span>
+                </div>
+
+                <div class="contact-mun__facts">
+                    <div class="contact-mun__fact">
+                        <span class="contact-mun__fact-label">Address</span>
+                        <span class="contact-mun__fact-value">Via del Corso 12,<br>00186 Rome</span>
+                    </div>
+                    <div class="contact-mun__fact">
+                        <span class="contact-mun__fact-label">Phone</span>
+                        <span class="contact-mun__fact-value"><a href="tel:+39061234567">+39 06 123 4567</a></span>
+                    </div>
+                    <div class="contact-mun__fact">
+                        <span class="contact-mun__fact-label">Email</span>
+                        <span class="contact-mun__fact-value"><a href="mailto:reservations@cafemoishi.it">reservations@cafemoishi.it</a></span>
+                    </div>
+                    <div class="contact-mun__fact">
+                        <span class="contact-mun__fact-label">Hours</span>
+                        <span class="contact-mun__fact-value">Golden Hour – Midnight</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-mun__form-wrap contact-mun__reveal">
+                <div class="contact-mun__form-accent">
+                    <img src="download (2).webp" alt="">
+                </div>
+
+                <h2 class="contact-mun__form-title">Tell us about the evening you're planning.</h2>
+
+                <form class="contact-mun__form" action="#" method="post">
+                    <div class="contact-mun__field">
+                        <label for="cf-name">Name</label>
+                        <input id="cf-name" type="text" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="contact-mun__field">
+                        <label for="cf-email">Email</label>
+                        <input id="cf-email" type="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="contact-mun__field">
+                        <label for="cf-date">Preferred date</label>
+                        <input id="cf-date" type="text" name="date" placeholder="e.g. Friday, 9PM">
+                    </div>
+                    <div class="contact-mun__field">
+                        <label for="cf-guests">Guests</label>
+                        <input id="cf-guests" type="text" name="guests" placeholder="Party size">
+                    </div>
+                    <div class="contact-mun__field contact-mun__field--full">
+                        <label for="cf-message">Message</label>
+                        <textarea id="cf-message" name="message" placeholder="Anything we should know?"></textarea>
+                    </div>
+
+                    <div class="contact-mun__submit-row">
+                        <span class="contact-mun__submit-note">We usually reply within one working day.</span>
+                        <button type="submit" class="contact-mun__cta">Send Message</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact-map" id="contactMap">
+        <div class="contact-map__header" id="contactMapHeader">
+            <span class="contact-map__eyebrow">Where To Find Us</span>
+            <h2 class="contact-map__title">On the rooftops of central Rome.</h2>
+            <p class="contact-map__body">A short walk from Via del Corso — look up for the terrace lights.</p>
+        </div>
+
+        <div class="contact-map__frame">
+            <div class="contact-map__inner" id="contactMapInner">
+                <iframe
+                    src="https://www.google.com/maps?q=Via+del+Corso+12,Rome,Italy&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="contact-map__photo">
+                    <img src="c6a45907-1bfc-4963-bce3-02bca2f47511.png" alt="The terrace entrance">
+                    <span>The way up</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
 <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; background: #040705; }
 
-    .qawali-night {
+    .mun-footer {
         --void: #040705;
         --cream: #f1faf3;
         --cream-dim: rgba(241,250,243,0.62);
         --cream-faint: rgba(241,250,243,0.38);
-        --accent: #1e4730;
-        --accent-bright: #3c8a5c;
-        --glow: #3ddc84;
-        --glow-soft: rgba(61,220,132,0.5);
-        --card-bg: rgba(241,250,243,0.03);
-        --card-border: rgba(241,250,243,0.1);
+        --accent-line: rgba(241,250,243,0.14);
+        --cta: #e4ff5b;
+        --cta-dim: rgba(228,255,91,0.5);
+    }
 
+    .mun-footer * { box-sizing: border-box; }
+
+    /* ================= TOP CTA BAR ================= */
+
+    .mun-footer__cta {
         position: relative;
-        background: var(--void);
-        color: var(--cream);
-        padding: 0 0 clamp(3rem, 6vw, 4.5rem);
-
-        opacity: 0;
-        transform: translateY(18px);
-        transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
-    }
-    .qawali-night.in-view { opacity: 1; transform: translateY(0); }
-
-    .qawali-night * { box-sizing: border-box; }
-
-    /* ---------- Sticky stage (background image + scrim + notes) ---------- */
-    /* This block stays pinned to the top of the viewport while everything
-       below scrolls over it, then unpins naturally once the section ends
-       (because the negative margin cancels its own height, so the section's
-       total height = the content's height). No JS needed for the pin/unpin. */
-
-    .qawali-night__stage {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        margin-bottom: -100vh;
-        z-index: 0;
-        overflow: hidden;
-    }
-
-    .qawali-night__bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center 30%;
-    }
-
-    .qawali-night__scrim {
-        position: absolute;
-        inset: 0;
-        background:
-            radial-gradient(ellipse 900px 500px at 50% 0%, rgba(61,220,132,0.14), transparent 60%),
-            linear-gradient(180deg, rgba(4,7,5,0.18) 0%, rgba(4,7,5,0.4) 42%, var(--void) 74%);
-    }
-
-    /* ---------- Floating musical notes (ambient, CSS only) ---------- */
-
-    .qawali-night__notes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-    .qawali-night__note {
-        position: absolute;
-        bottom: -8%;
-        color: var(--glow);
-        opacity: 0;
-        font-size: 1.1rem;
-        filter: drop-shadow(0 0 6px var(--glow-soft));
-        animation: qawaliRise linear infinite;
-    }
-    .qawali-night__note svg { width: 1em; height: 1em; display: block; }
-    @keyframes qawaliRise {
-        0%   { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
-        10%  { opacity: .85; }
-        90%  { opacity: .4; }
-        100% { opacity: 0; transform: translateY(-620px) translateX(var(--drift, 24px)) rotate(18deg); }
-    }
-
-    /* ---------- Content that scrolls over the sticky stage ---------- */
-
-    .qawali-night__content {
-        position: relative;
-        z-index: 2;
-    }
-
-    /* ---------- Scrolling marquee ribbon ---------- */
-
-    .qawali-night__marquee {
-        position: relative;
-        overflow: hidden;
-        white-space: nowrap;
-        border-top: 1px solid var(--card-border);
-        border-bottom: 1px solid var(--card-border);
-        background: rgba(4,7,5,0.55);
-        backdrop-filter: blur(2px);
-        padding: 0.85rem 0;
-        margin-bottom: clamp(2.5rem, 6vw, 4rem);
-    }
-
-    .qawali-night__marquee-track {
-        display: inline-flex;
+        background: var(--cream);
+        padding: clamp(3rem, 7vw, 5.5rem) clamp(1.5rem, 6vw, 5rem);
+        display: flex;
         align-items: center;
-        gap: 2.5rem;
-        width: max-content;
-        animation: qawaliMarquee 36s linear infinite;
-        will-change: transform;
-        backface-visibility: hidden;
-        transform: translateZ(0);
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
     }
 
-    .qawali-night__marquee-track span {
-        font-family: 'Fredoka', sans-serif;
-        font-weight: 600;
-        font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-        letter-spacing: 0.06em;
+    .mun-footer__cta-eyebrow {
+        font-family: 'Jost', sans-serif;
+        font-weight: 500;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: var(--glow);
-        display: inline-flex;
+        line-height: 1.6;
+        color: var(--void);
+        flex: 0 0 auto;
+    }
+
+    .mun-footer__cta-eyebrow a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .mun-footer__cta-heading {
+        flex: 1 1 auto;
+        min-width: 260px;
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 0.6rem;
-        flex-shrink: 0;
-    }
-    .qawali-night__marquee-track span::after { content: "✦"; color: var(--cream-faint); font-size: 0.7em; }
-
-    @keyframes qawaliMarquee {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-33.3334%); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .qawali-night__marquee-track { animation: none; }
-        .qawali-night__note { animation: none; display: none; }
-        .qawali-night__frame { opacity: 1 !important; transform: none !important; transition: none !important; }
-    }
-
-    /* ---------- Header ---------- */
-
-    .qawali-night__header {
-        max-width: 780px;
-        margin: 0 auto clamp(2.5rem, 6vw, 3.5rem);
-        padding: 0 clamp(1.5rem, 6vw, 3rem);
         text-align: center;
     }
 
-    .qawali-night__eyebrow {
-        display: block;
-        font-family: 'Alex Brush', cursive;
-        font-weight: 400;
-        font-size: clamp(2rem, 4.5vw, 2.8rem);
-        color: var(--glow);
-        margin-bottom: 0.4rem;
-    }
-
-    .qawali-night__headline {
-        margin: 0 0 1rem;
+    .mun-footer__cta-heading h2 {
+        margin: 0;
         font-family: 'Cormorant Garamond', serif;
         font-weight: 500;
-        font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-        line-height: 1.15;
-        color: var(--cream);
-    }
-    .qawali-night__headline em {
         font-style: italic;
-        font-weight: 400;
-        color: var(--cream-dim);
+        font-size: clamp(2.6rem, 7vw, 4.6rem);
+        line-height: 1;
+        color: var(--void);
     }
 
-    .qawali-night__body {
-        margin: 0 auto;
-        max-width: 56ch;
-        font-family: 'Jost', sans-serif;
-        font-weight: 400;
-        font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-        line-height: 1.85;
-        color: var(--cream-dim);
+    .mun-footer__cta-underline {
+        margin-top: 0.5rem;
+        width: clamp(160px, 22vw, 320px);
+        height: 2px;
+        background: var(--cta);
     }
 
-    .qawali-night__meta {
+    .mun-footer__cta-arrow {
+        flex: 0 0 auto;
+        width: clamp(64px, 6vw, 88px);
+        height: clamp(64px, 6vw, 88px);
+        border-radius: 50%;
+        background: var(--cta);
+        border: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-        margin-top: clamp(1.5rem, 3vw, 2rem);
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.35s cubic-bezier(.2,.9,.3,1), box-shadow 0.35s ease;
     }
 
-    .qawali-night__chip {
+    .mun-footer__cta-arrow svg {
+        width: 34%;
+        height: 34%;
+    }
+
+    .mun-footer__cta-arrow:hover {
+        transform: scale(1.06);
+        box-shadow: 0 12px 30px -10px var(--cta-dim);
+    }
+
+    /* ================= BOTTOM FOOTER ================= */
+
+    .mun-footer__base {
+        background: var(--void);
+        color: var(--cream);
+        padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 6vw, 5rem) clamp(1.75rem, 4vw, 2.5rem);
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1fr 1fr;
+        gap: clamp(2rem, 4vw, 3rem);
+    }
+
+    .mun-footer__logo {
+        width: 64px;
+        height: 64px;
+        border: 1px dashed var(--cream-faint);
+        border-radius: 10px;
         display: flex;
         align-items: center;
-        gap: 0.5em;
-        padding: 0.5em 1em;
-        border: 1px solid var(--card-border);
-        border-radius: 999px;
-        background: var(--card-bg);
-        backdrop-filter: blur(2px);
+        justify-content: center;
+        margin-bottom: 0.9rem;
         font-family: 'Jost', sans-serif;
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--cream-dim);
-    }
-    .qawali-night__chip-dot {
-        width: 5px; height: 5px; border-radius: 50%;
-        background: var(--glow);
-        box-shadow: 0 0 6px var(--glow-soft);
-        flex-shrink: 0;
+        color: var(--cream-faint);
     }
 
-    /* ---------- Image gallery ---------- */
-
-    .qawali-night__gallery {
-        max-width: 1100px;
-        margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
-        padding: 0 clamp(1.5rem, 6vw, 3rem);
-        display: grid;
-        grid-template-columns: 1.3fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 1rem;
-        height: clamp(420px, 55vw, 520px);
+    .mun-footer__logo img {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
     }
 
-    .qawali-night__frame {
-        position: relative;
-        border-radius: 14px;
-        overflow: hidden;
-        border: 1px solid var(--card-border);
-        background: var(--card-bg);
-
-        /* scroll-triggered pop-in, base state */
-        opacity: 0;
-        transform: translateY(55px) scale(0.93);
-        transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
-        will-change: opacity, transform;
-    }
-    .qawali-night__frame.qawali-in {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
-    /* Different duration/delay per box so they don't move in lockstep — feels more alive */
-    .qawali-night__frame:nth-child(1) { transition-duration: 1.05s; transition-delay: 0s; }
-    .qawali-night__frame:nth-child(2) { transition-duration: 0.7s;  transition-delay: 0.08s; }
-    .qawali-night__frame:nth-child(3) { transition-duration: 0.95s; transition-delay: 0.16s; }
-    .qawali-night__frame:nth-child(4) { transition-duration: 0.8s;  transition-delay: 0.22s; }
-    .qawali-night__frame:nth-child(5) { transition-duration: 1.15s; transition-delay: 0.1s; }
-
-    .qawali-night__frame--tall { grid-row: 1 / 3; }
-
-    .qawali-night__frame img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: saturate(0.9) brightness(0.88);
-        transition: transform 0.7s cubic-bezier(.2,.7,.2,1), filter 0.5s ease;
-    }
-    .qawali-night__frame:hover img {
-        transform: scale(1.07);
-        filter: saturate(1) brightness(1);
-    }
-
-    .qawali-night__frame::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(0deg, rgba(4,7,5,0.75) 0%, transparent 45%);
-        pointer-events: none;
-    }
-
-    .qawali-night__frame-caption {
-        position: absolute;
-        left: 0.9rem;
-        right: 0.9rem;
-        bottom: 0.8rem;
-        z-index: 1;
-        font-family: 'Jost', sans-serif;
-        font-weight: 500;
-        font-size: 0.68rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+    .mun-footer__brand-name {
+        margin: 0 0 0.4rem;
+        font-family: 'Fredoka', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.6rem, 3vw, 2rem);
+        letter-spacing: 0.01em;
+        line-height: 1.1;
         color: var(--cream);
     }
 
-    @media (max-width: 780px) {
-        .qawali-night__gallery {
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: repeat(3, 160px);
-            height: auto;
-        }
-        .qawali-night__frame--tall { grid-row: auto; grid-column: 1 / 3; }
-    }
-
-    @media (max-width: 480px) {
-        .qawali-night__gallery { grid-template-columns: 1fr; grid-template-rows: repeat(3, 200px); }
-        .qawali-night__frame--tall { grid-column: 1; }
-    }
-
-    /* ---------- CTA ---------- */
-
-    .qawali-night__actions {
-        display: flex;
-        justify-content: center;
-    }
-
-    .qawali-night__cta {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6em;
-        padding: 0.95em 2.1em;
+    .mun-footer__brand-tag {
+        margin: 0;
         font-family: 'Jost', sans-serif;
-        font-size: 0.75rem;
-        font-weight: 500;
+        font-weight: 400;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        letter-spacing: 0.02em;
+        color: var(--cream-dim);
+        max-width: 22ch;
+    }
+
+    .mun-footer__col-label {
+        margin: 0 0 1.1rem;
+        font-family: 'Jost', sans-serif;
+        font-weight: 600;
+        font-size: 0.68rem;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: var(--void);
-        background: linear-gradient(135deg, var(--accent-bright), #a9e6c2);
-        border: none;
-        border-radius: 3px;
+        color: var(--cream);
+    }
+
+    .mun-footer__col a {
+        display: block;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.86rem;
+        color: var(--cream);
         text-decoration: none;
-        cursor: pointer;
-        overflow: hidden;
-        transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, letter-spacing .3s ease;
+        margin-bottom: 0.55rem;
+        transition: color 0.3s ease;
     }
-    .qawali-night__cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 14px 30px -10px var(--glow-soft);
-        letter-spacing: 0.22em;
+
+    .mun-footer__col a:hover { color: var(--cta); }
+
+    .mun-footer__col p {
+        margin: 0 0 0.55rem;
+        font-family: 'Jost', sans-serif;
+        font-weight: 400;
+        font-size: 0.86rem;
+        line-height: 1.55;
+        color: var(--cream-dim);
     }
-    .qawali-night__cta::before {
-        content: "";
-        position: absolute;
-        top: 0; left: -60%; width: 40%; height: 100%;
-        background: linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
-        transform: skewX(-20deg);
-        transition: left .6s ease;
+
+    .mun-footer__see-map {
+        display: inline-block;
+        margin-top: 0.35rem;
+        font-family: 'Jost', sans-serif;
+        font-weight: 500;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        color: var(--cream) !important;
     }
-    .qawali-night__cta:hover::before { left: 130%; }
+
+    .mun-footer__see-map:hover { color: var(--cta) !important; }
+
+    .mun-footer__newsletter-link {
+        display: inline-block;
+        font-family: 'Jost', sans-serif;
+        font-weight: 500;
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        color: var(--cream);
+        margin-bottom: 1.9rem;
+    }
+
+    .mun-footer__newsletter-link:hover { color: var(--cta); }
+
+    .mun-footer__socials {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+    }
+
+    .mun-footer__socials a {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--cream);
+        border-radius: 50%;
+        transition: color 0.3s ease, background 0.3s ease;
+    }
+
+    .mun-footer__socials a:hover {
+        color: var(--void);
+        background: var(--cta);
+    }
+
+    .mun-footer__socials svg { width: 16px; height: 16px; }
+
+    .mun-footer__bottom-row {
+        grid-column: 1 / -1;
+        margin-top: clamp(2rem, 4vw, 3rem);
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--accent-line);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        color: var(--cream-faint);
+    }
+
+    @media (max-width: 900px) {
+        .mun-footer__base { grid-template-columns: 1fr 1fr; }
+        .mun-footer__brand { grid-column: 1 / -1; margin-bottom: 0.5rem; }
+    }
+
+    @media (max-width: 560px) {
+        .mun-footer__cta { flex-direction: column; text-align: center; }
+        .mun-footer__cta-eyebrow { order: 2; }
+        .mun-footer__cta-arrow { order: 3; }
+        .mun-footer__base { grid-template-columns: 1fr; }
+    }
 </style>
-</head>
-<body>
 
-<section class="qawali-night" id="qawali">
+<footer class="mun-footer">
 
-    <!-- Sticky stage: bg image + scrim + notes stay pinned while content scrolls over them -->
-    <div class="qawali-night__stage">
-        <!-- Swap this src for your own qawwali-night photo -->
-        <img class="qawali-night__bg" src="iphone wallpaper.webp" alt="" loading="lazy">
-        <div class="qawali-night__scrim"></div>
+    <div class="mun-footer__cta">
+        <span class="mun-footer__cta-eyebrow">STILL<br>DECIDING? <a href="#reserve">→</a></span>
 
-        <div class="qawali-night__notes" aria-hidden="true">
-            <span class="qawali-night__note" style="left:6%;  --drift:20px;  animation-duration:10s; animation-delay:0s;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-            <span class="qawali-night__note" style="left:18%; --drift:-16px; animation-duration:13s; animation-delay:2s;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-            <span class="qawali-night__note" style="left:32%; --drift:14px;  animation-duration:9s;  animation-delay:4s;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 17V4a1 1 0 0 1 1.3-1l7 2.2A1 1 0 0 1 18 6v9"/><circle cx="6" cy="18" r="3"/><circle cx="15" cy="16" r="3"/></svg></span>
-            <span class="qawali-night__note" style="left:52%; --drift:-22px; animation-duration:11s; animation-delay:1s;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-            <span class="qawali-night__note" style="left:68%; --drift:18px;  animation-duration:14s; animation-delay:5s;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 17V4a1 1 0 0 1 1.3-1l7 2.2A1 1 0 0 1 18 6v9"/><circle cx="6" cy="18" r="3"/><circle cx="15" cy="16" r="3"/></svg></span>
-            <span class="qawali-night__note" style="left:84%; --drift:-14px; animation-duration:10s; animation-delay:3s;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-            <span class="qawali-night__note" style="left:94%; --drift:20px;  animation-duration:12s; animation-delay:6s;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 17V4a1 1 0 0 1 1.3-1l7 2.2A1 1 0 0 1 18 6v9"/><circle cx="6" cy="18" r="3"/><circle cx="15" cy="16" r="3"/></svg></span>
+        <div class="mun-footer__cta-heading">
+            <h2>Reserve a table</h2>
+            <div class="mun-footer__cta-underline"></div>
         </div>
+
+        <a class="mun-footer__cta-arrow" href="#reserve" aria-label="Reserve a table">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="#040705" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
     </div>
 
-    <!-- Content: scrolls over the sticky stage, then moves away with it once the section ends -->
-    <div class="qawali-night__content">
+    <div class="mun-footer__base">
 
-        <div class="qawali-night__marquee" aria-hidden="true">
-            <div class="qawali-night__marquee-track">
-                <span>Live Qawwali</span><span>Sufi Nights</span><span>Rooftop Sessions</span><span>Every Friday</span>
-                <span>Live Qawwali</span><span>Sufi Nights</span><span>Rooftop Sessions</span><span>Every Friday</span>
+        <div class="mun-footer__brand">
+            <div class="mun-footer__logo">
+                <!-- Replace with: <img src="your-logo.png" alt="Cafe Moishi logo"> -->
+                LOGO
+            </div>
+            <p class="mun-footer__brand-name">Cafe Moishi</p>
+            <p class="mun-footer__brand-tag">A rooftop cocktail and shisha bar, made for slow evenings above Rome.</p>
+        </div>
+
+        <div class="mun-footer__col">
+            <p class="mun-footer__col-label">Rome</p>
+            <a href="mailto:reservations@cafemoishi.it">reservations@cafemoishi.it</a>
+            <a href="tel:+39061234567">+39 06 123 4567</a>
+            <p>Via del Corso 12,<br>00186 Rome</p>
+            <a class="mun-footer__see-map" href="https://maps.google.com" target="_blank" rel="noopener">See on map ↗</a>
+        </div>
+
+        <div class="mun-footer__col">
+            <p class="mun-footer__col-label">Hours</p>
+            <p>Golden Hour – Midnight<br>Seven days a week</p>
+            <p style="margin-top:1rem;">Reservations recommended<br>after 7PM</p>
+        </div>
+
+        <div class="mun-footer__col">
+            <p class="mun-footer__col-label">Want first access to<br>our evenings?</p>
+            <a class="mun-footer__newsletter-link" href="#newsletter">Sign up for our newsletter →</a>
+
+            <p class="mun-footer__col-label" style="margin-bottom:0.8rem;">Follow us</p>
+            <div class="mun-footer__socials">
+                <a href="#" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="17.2" cy="6.8" r="1" fill="currentColor"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 9h2.5V6h-2.5c-1.93 0-3.5 1.57-3.5 3.5V12H8.5v3H10.5v6h3v-6h2.3l.5-3H13.5v-2c0-.55.45-1 1-1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 4v9.4a2.8 2.8 0 1 1-2.2-2.74M15 4a4.2 4.2 0 0 0 4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
             </div>
         </div>
 
-        <div class="qawali-night__header">
-            <span class="qawali-night__eyebrow">Every Friday Night</span>
-            <h2 class="qawali-night__headline">Qawwali on the terrace,<br><em>under the Roman sky.</em></h2>
-            <p class="qawali-night__body">
-                Once a week, the rooftop slows down and the harmonium takes over. Live qawwals, hand drums and
-                voices that climb into the night — cushions out, drinks flowing, the whole terrace singing along
-                by the last verse.
-            </p>
-            <div class="qawali-night__meta">
-                <span class="qawali-night__chip"><span class="qawali-night__chip-dot"></span>Fridays, 9PM</span>
-                <span class="qawali-night__chip"><span class="qawali-night__chip-dot"></span>Live Harmonium &amp; Tabla</span>
-                <span class="qawali-night__chip"><span class="qawali-night__chip-dot"></span>Limited Terrace Seating</span>
-            </div>
-        </div>
-
-        <div class="qawali-night__gallery">
-            <div class="qawali-night__frame qawali-night__frame--tall">
-                <img src="qawwali night.jpg" alt="Qawwali night on the Mùn terrace">
-                <span class="qawali-night__frame-caption">The harmonium takes the terrace</span>
-            </div>
-            <div class="qawali-night__frame">
-                <img src="https://placehold.co/500x360/0e1512/3ddc84?text=Live+Vocals" alt="Live qawwali vocals">
-                <span class="qawali-night__frame-caption">Voices that fill the sky</span>
-            </div>
-            <div class="qawali-night__frame">
-                <img src="https://placehold.co/500x360/10261b/f1faf3?text=Crowd+%26+Cushions" alt="Guests enjoying qawwali night">
-                <span class="qawali-night__frame-caption">Cushions out, hands clapping</span>
-            </div>
-            <div class="qawali-night__frame">
-                <img src="https://placehold.co/500x360/1f4d38/f1faf3?text=Tabla+%26+Drums" alt="Tabla and hand drums">
-                <span class="qawali-night__frame-caption">Rhythm carried by hand</span>
-            </div>
-            <div class="qawali-night__frame">
-                <img src="https://placehold.co/500x360/0a0f0c/3ddc84?text=Golden+Hour" alt="Golden hour on the terrace">
-                <span class="qawali-night__frame-caption">Golden hour, front row</span>
-            </div>
-        </div>
-
-        <div class="qawali-night__actions">
-            <a href="#reserve" class="qawali-night__cta">Reserve Friday Night</a>
+        <div class="mun-footer__bottom-row">
+            <span>© 2026 Cafe Moishi. All rights reserved.</span>
+            <span>Made in Rome</span>
         </div>
 
     </div>
 
-</section>
+</footer>
 
 <script>
-    (function () {
-        var section = document.getElementById('qawali');
-        if (!section) return;
+  /* ===== Lenis — smooth scroll (whole page) ===== */
+  const lenis = new Lenis({
+    duration: 1.15,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    touchMultiplier: 1.5,
+  });
 
-        // Fade the whole section in once first
-        if (!('IntersectionObserver' in window)) {
-            section.classList.add('in-view');
-            document.querySelectorAll('.qawali-night__frame').forEach(function (f) {
-                f.classList.add('qawali-in');
-            });
-            return;
-        }
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 
-        var sectionObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    section.classList.add('in-view');
-                    sectionObserver.disconnect();
-                }
-            });
-        }, { threshold: 0.12 });
-        sectionObserver.observe(section);
+  // Respect users who've asked for reduced motion — jump to native scroll
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    lenis.destroy();
+  }
+</script>
+<script>
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-        // Individual gallery boxes pop in as they cross into view, each at its own CSS-defined speed
-        var frames = section.querySelectorAll('.qawali-night__frame');
-        var frameObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('qawali-in');
-                    frameObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+  burger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
 
-        frames.forEach(function (frame) { frameObserver.observe(frame); });
-    })();
+  mobileMenu.querySelectorAll('a:not(.mobile-location)').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
 
-    // Seamless marquee: keep doubling the content until it's at least 2x the
-    // wrapper's width, so the -50% loop always lines up exactly with no jump.
-    (function () {
-        var wrap = section.querySelector('.qawali-night__marquee');
-        var track = section.querySelector('.qawali-night__marquee-track');
-        if (!wrap || !track) return;
+  const locationTrigger = document.getElementById('locationTrigger');
+  locationTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    locationTrigger.classList.toggle('open');
+  });
+  document.addEventListener('click', () => locationTrigger.classList.remove('open'));
+</script>
+<script>
+  /* ===== CONTACT PAGE — scroll reveals ===== */
+  (function () {
+    var contactSection = document.getElementById('contact');
+    var contactGrid = document.getElementById('contactGrid');
+    var mapHeader = document.getElementById('contactMapHeader');
+    var mapInner = document.getElementById('contactMapInner');
 
-        var PIXELS_PER_SECOND = 55;
+    if (!('IntersectionObserver' in window)) {
+      [contactSection, contactGrid, mapHeader, mapInner].forEach(function (el) {
+        if (el) el.classList.add('in-view');
+      });
+      return;
+    }
 
-        function setup() {
-            track.style.animation = 'none';
-            if (!track.dataset.original) track.dataset.original = track.innerHTML;
-            track.innerHTML = track.dataset.original;
-
-            var guard = 0;
-            while (track.scrollWidth < wrap.clientWidth * 2 && guard < 10) {
-                track.innerHTML += track.innerHTML;
-                guard++;
-            }
-
-            var halfWidth = track.scrollWidth / 2;
-            var duration = Math.max(halfWidth / PIXELS_PER_SECOND, 8);
-            track.style.animation = 'qawaliMarquee ' + duration + 's linear infinite';
-        }
-
-        setup();
-
-        var resizeTimer;
-        window.addEventListener('resize', function () {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(setup, 200);
+    function reveal(el, threshold) {
+      if (!el) return;
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            el.classList.add('in-view');
+            obs.disconnect();
+          }
         });
-    })();
+      }, { threshold: threshold || 0.15 });
+      obs.observe(el);
+    }
+
+    reveal(contactSection, 0.08);
+    reveal(contactGrid, 0.12);
+    reveal(mapHeader, 0.2);
+    reveal(mapInner, 0.15);
+  })();
 </script>
 
-</body>
+    </body>
 </html>
