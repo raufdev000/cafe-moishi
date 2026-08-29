@@ -1928,7 +1928,7 @@ textarea {
     top: 0;
     left: 0;
     width: 100svw;
-
+opacity: 30%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1939,7 +1939,8 @@ textarea {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("backgroundafter.png");
+    background-image: url("download\ \(4\).jfif");
+    background-size: cover;
 }
 
 .home-hero__top {
