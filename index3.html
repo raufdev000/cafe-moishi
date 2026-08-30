@@ -3,498 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cafe Moishi — Shisha Flavours</title>
+<title>Cafe Moishi — Drinks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Only the two fonts used across this section, matching the reference: -->
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Fredoka:wght@500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #06090a; }
+    html, body { margin: 0; padding: 0; background: #040705; }
 
-    .shisha {
-        --void: #06090a;
-        --panel: #0e1512;
-        --deep: #10261b;
-        --mid: #1f4d38;
-        --glow: #3ddc84;
-        --glow-soft: rgba(61,220,132,0.5);
-        --cream: #f2ecd8;
-        --cream-dim: rgba(242,236,216,0.65);
-        --cream-faint: rgba(242,236,216,0.4);
-        --card-bg: rgba(242,236,216,0.04);
-        --card-border: rgba(242,236,216,0.12);
+    .drinks {
+        --void: #040705;
+        --cream: #f1faf3;
+        --cream-dim: rgba(241,250,243,0.62);
+        --cream-faint: rgba(241,250,243,0.36);
+        --accent: #a78bfa;
+        --glow: #a78bfa;
+        --glow-soft: rgba(6, 69, 241, 0.5);
+        --panel-bg: rgba(11,17,13,0.72);
+        --panel-border: rgba(250, 241, 249, 0.12);
+        --line: rgba(241,250,243,0.14);
 
         position: relative;
         overflow: hidden;
         background: var(--void);
         color: var(--cream);
-        padding: clamp(4rem, 9vw, 6.5rem) 0;
+        padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem);
 
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
     }
-    .shisha.in-view { opacity: 1; transform: translateY(0); }
-    .shisha * { box-sizing: border-box; }
+    .drinks.in-view { opacity: 1; transform: translateY(0); }
+    .drinks * { box-sizing: border-box; }
 
-    /* ---------- Background image ----------
-       Swap this src for your own coal / lounge / hookah photo. */
-
-    .shisha__bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center 35%;
-        z-index: -2;
+    /* ---------- Background photo ---------- */
+    /* Swap this src for your own bar / drinks photo */
+    .drinks__bg {
+        position: absolute; inset: 0; z-index: -2;
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center 35%;
     }
-
-    .shisha__scrim {
-        position: absolute;
-        inset: 0;
-        z-index: -2;
+    .drinks__scrim {
+        position: absolute; inset: 0; z-index: -2;
         background:
-            radial-gradient(ellipse 900px 500px at 50% -5%, rgba(61,220,132,0.14), transparent 60%),
-            linear-gradient(180deg, rgba(6,9,10,0.86) 0%, rgba(6,9,10,0.93) 45%, var(--void) 100%);
+            radial-gradient(ellipse 800px 500px at 50% -5%, rgba(61,220,132,0.12), transparent 60%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.308) 0%, rgba(4,7,5,0.9) 55%, var(--void) 100%);
     }
 
-    /* ---------- Ambient smoke ---------- */
-
-    .shisha__smoke { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-    .shisha__wisp { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.3; mix-blend-mode: screen; }
-    .shisha__wisp--a { width: 46vw; height: 46vw; left: -14vw; top: -18vw; background: radial-gradient(circle, var(--mid) 0%, transparent 70%); animation: shishaDriftA 24s ease-in-out infinite; }
-    .shisha__wisp--b { width: 38vw; height: 38vw; right: -10vw; bottom: -16vw; background: radial-gradient(circle, var(--glow) 0%, transparent 70%); opacity: 0.14; animation: shishaDriftB 28s ease-in-out infinite; }
-    @keyframes shishaDriftA { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(3vw,4vw) scale(1.08); } }
-    @keyframes shishaDriftB { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-4vw,-3vw) scale(1.1); } }
-
-    @media (prefers-reduced-motion: reduce) {
-        .shisha__wisp { animation: none; }
+    /* ---------- Rising bubbles (ambient, CSS only) ---------- */
+    .drinks__bubbles { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .drinks__bubble {
+        position: absolute;
+        bottom: -6%;
+        border-radius: 50%;
+        border: 1px solid rgba(241,250,243,0.35);
+        opacity: 0;
+        animation: drinksBubble linear infinite;
     }
+    @keyframes drinksBubble {
+        0%   { opacity: 0; transform: translateY(0) translateX(0); }
+        12%  { opacity: .55; }
+        88%  { opacity: .25; }
+        100% { opacity: 0; transform: translateY(-108vh) translateX(var(--drift, 18px)); }
+    }
+    @media (prefers-reduced-motion: reduce) { .drinks__bubble { animation: none; display: none; } }
 
     /* ---------- Header ---------- */
-
-    .shisha__header {
-        position: relative;
-        z-index: 1;
+    .drinks__header {
+        position: relative; z-index: 1;
         text-align: center;
-        max-width: 720px;
-        margin: 0 auto clamp(2.5rem, 6vw, 3.5rem);
-        padding: 0 1.5rem;
+        max-width: 640px;
+        margin: 0 auto clamp(1rem, 3vw, 2.5rem);
     }
-
-    .shisha__eyebrow {
+    .drinks__eyebrow {
         display: block;
         font-family: 'Alex Brush', cursive;
-        font-weight: 400;
-        font-size: clamp(2rem, 4.5vw, 2.8rem);
+        font-size: clamp(1.9rem, 4vw, 2.6rem);
         color: var(--glow);
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.2rem;
     }
-
-    .shisha__title {
-        margin: 0 0 0.9rem;
+    .drinks__title {
+        margin: 0 0 0.7rem;
         font-family: 'Fredoka', sans-serif;
         font-weight: 700;
-        font-size: clamp(1.8rem, 4.4vw, 2.9rem);
-        line-height: 1.25;
+        font-size: clamp(1.9rem, 4.2vw, 2.8rem);
         color: var(--cream);
     }
-
-    .shisha__subtitle {
-        margin: 0 auto;
-        max-width: 46ch;
-        font-family: 'Fredoka', sans-serif;
-        font-weight: 400;
-        font-size: clamp(0.9rem, 1.5vw, 1rem);
-        line-height: 1.75;
+    .drinks__subtitle {
+        margin: 0;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.92rem;
+        line-height: 1.7;
         color: var(--cream-dim);
     }
 
-    /* ---------- Filter pills ---------- */
-
-    .shisha__filters {
-        position: relative;
-        z-index: 1;
+    /* ---------- Tabs ---------- */
+    .drinks__tabs {
+        position: relative; z-index: 1;
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
         justify-content: center;
-        gap: 0.6rem;
-        margin: clamp(1.8rem, 4vw, 2.4rem) auto clamp(2.5rem, 5vw, 3.2rem);
-        padding: 0 1.5rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0 auto clamp(1.6rem, 4vw, 2.2rem);
+        max-width: 780px;
     }
-
-    .shisha__filter {
-        font-family: 'Fredoka', sans-serif;
-        font-weight: 600;
+    .drinks__tab {
+        font-family: 'Jost', sans-serif;
+        font-weight: 500;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--cream-dim);
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
+        background: rgba(241,250,243,0.04);
+        border: 1px solid var(--panel-border);
         border-radius: 999px;
-        padding: 0.6em 1.3em;
+        padding: 0.6em 1.1em;
         cursor: pointer;
-        transition: color .3s ease, border-color .3s ease, background .3s ease, transform .3s cubic-bezier(.2,.7,.2,1);
+        transition: color .3s ease, border-color .3s ease, background .3s ease;
     }
-    .shisha__filter:hover { color: var(--cream); border-color: var(--mid); transform: translateY(-2px); }
-    .shisha__filter.is-active {
+    .drinks__tab:hover { color: var(--cream); border-color: var(--glow); }
+    .drinks__tab.is-active {
         color: var(--void);
         background: var(--glow);
         border-color: var(--glow);
     }
 
-    /* ---------- Flavour grid ---------- */
-
-    .shisha__grid {
-        position: relative;
-        z-index: 1;
-        max-width: 1200px;
+    /* ---------- Menu panel (the distinct part: a single framed list, not a card grid) ---------- */
+    .drinks__panel {
+        position: relative; z-index: 1;
+        max-width: 780px;
         margin: 0 auto;
-        padding: 0 clamp(1.25rem, 5vw, 3rem);
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: clamp(0.9rem, 2vw, 1.3rem);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        background: var(--panel-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: clamp(1.6rem, 4vw, 2.4rem) clamp(1.4rem, 4vw, 2.6rem);
     }
 
-    .shisha__card {
-        position: relative;
-        border-radius: 14px;
-        overflow: hidden;
-        aspect-ratio: 3 / 3.6;
-        border: 1px solid var(--card-border);
-        background: var(--panel);
-
-        opacity: 0;
-        transform: translateY(40px) scale(0.95);
-        transition-property: opacity, transform;
-        transition-timing-function: cubic-bezier(.2,.8,.2,1);
-        transition-duration: 0.8s;
+    .drinks__panel-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px solid var(--line);
     }
-    .shisha__card.shisha-in { opacity: 1; transform: translateY(0) scale(1); }
-
-    /* staggered pop-in speed per column position, modern uneven feel */
-    .shisha__card:nth-child(5n+1) { transition-delay: 0s; }
-    .shisha__card:nth-child(5n+2) { transition-delay: .07s; }
-    .shisha__card:nth-child(5n+3) { transition-delay: .14s; }
-    .shisha__card:nth-child(5n+4) { transition-delay: .21s; }
-    .shisha__card:nth-child(5n+5) { transition-delay: .28s; }
-
-    .shisha__card.is-hidden {
-        display: none;
-    }
-
-    .shisha__card img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: saturate(0.85) brightness(0.82);
-        transition: transform 0.6s cubic-bezier(.2,.7,.2,1), filter 0.4s ease;
-    }
-    .shisha__card:hover img {
-        transform: scale(1.08);
-        filter: saturate(1) brightness(0.95);
-    }
-
-    .shisha__card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(0deg, rgba(6,9,10,0.94) 0%, rgba(6,9,10,0.25) 55%, transparent 78%);
-        pointer-events: none;
-    }
-
-    .shisha__card-tag {
-        position: absolute;
-        top: 0.7rem;
-        left: 0.7rem;
-        z-index: 1;
+    .drinks__panel-title {
         font-family: 'Fredoka', sans-serif;
         font-weight: 600;
-        font-size: 0.58rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+        font-size: 1.05rem;
         color: var(--glow);
-        background: rgba(6,9,10,0.55);
-        border: 1px solid rgba(61,220,132,0.35);
-        border-radius: 999px;
-        padding: 0.35em 0.7em;
-        backdrop-filter: blur(3px);
+    }
+    .drinks__panel-price {
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--cream-faint);
     }
 
-    .shisha__card-name {
-        position: absolute;
-        left: 0.9rem;
-        right: 0.9rem;
-        bottom: 0.85rem;
-        z-index: 1;
-        font-family: 'Fredoka', sans-serif;
-        font-weight: 600;
-        font-size: clamp(0.92rem, 1.6vw, 1.05rem);
-        line-height: 1.25;
+    .drinks__list {
+        display: none;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        column-count: 1;
+        column-gap: 2rem;
+    }
+    .drinks__list.is-active { display: block; }
+
+    @media (min-width: 560px) {
+        .drinks__list { column-count: 2; }
+    }
+
+    .drinks__item {
+        display: flex;
+        align-items: baseline;
+        gap: 0.4rem;
+        break-inside: avoid;
+        padding: 0.55rem 0;
+        border-bottom: 1px dashed var(--line);
+    }
+    .drinks__item-name {
+        font-family: 'Jost', sans-serif;
+        font-weight: 400;
+        font-size: 0.92rem;
         color: var(--cream);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+    }
+    .drinks__item-fill {
+        flex: 1;
+        border-bottom: 1px dotted var(--cream-faint);
+        transform: translateY(-4px);
+    }
+    .drinks__item-price {
+        font-family: 'Fredoka', sans-serif;
+        font-weight: 500;
+        font-size: 0.86rem;
+        color: var(--glow);
+        white-space: nowrap;
     }
 
-    @media (max-width: 480px) {
-        .shisha__grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .shisha__card { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .drinks__more {
+        margin: 0.8rem 0 0;
+        font-family: 'Jost', sans-serif;
+        font-style: italic;
+        font-size: 0.78rem;
+        color: var(--cream-faint);
+        text-align: center;
     }
 
     /* ---------- CTA ---------- */
-
-    .shisha__actions {
-        position: relative;
-        z-index: 1;
+    .drinks__actions {
+        position: relative; z-index: 1;
         display: flex;
         justify-content: center;
-        margin-top: clamp(2.5rem, 5vw, 3.5rem);
+        margin-top: clamp(1.8rem, 4vw, 2.4rem);
     }
-
-    .shisha__cta {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6em;
-        padding: 0.95em 2.1em;
-        font-family: 'Fredoka', sans-serif;
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+    .drinks__cta {
+        display: inline-flex; align-items: center; gap: 0.6em;
+        font-family: 'Jost', sans-serif;
+        font-weight: 500; font-size: 0.75rem;
+        letter-spacing: 0.16em; text-transform: uppercase;
         color: var(--void);
-        background: linear-gradient(135deg, var(--glow), #a9e6c2);
-        border: none;
-        border-radius: 999px;
+        background: linear-gradient(135deg, var(--accent), var(--glow));
+        border: none; border-radius: 3px;
+        padding: 0.9em 2em;
         text-decoration: none;
         cursor: pointer;
-        overflow: hidden;
         transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, letter-spacing .3s ease;
     }
-    .shisha__cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 14px 30px -10px var(--glow-soft);
-        letter-spacing: 0.14em;
+    .drinks__cta:hover { transform: translateY(-3px); box-shadow: 0 14px 28px -10px var(--glow-soft); letter-spacing: 0.2em; }
+
+    @media (max-width: 480px) {
+        .drinks__item-name { white-space: normal; }
     }
 </style>
 </head>
 <body>
 
-<section class="shisha" id="shisha">
+<section class="drinks" id="drinks">
 
-    <!-- Swap this src for your own shisha lounge / coal photo -->
-    <img class="shisha__bg" src="shisha-lounge.jpg" alt="" loading="lazy">
-    <div class="shisha__scrim"></div>
+    <!-- Swap this src for your own bar / drinks photo -->
+    <img class="drinks__bg" src="drinkssss.webp" alt="" loading="lazy">
+    <div class="drinks__scrim"></div>
 
-    <div class="shisha__smoke" aria-hidden="true">
-        <span class="shisha__wisp shisha__wisp--a"></span>
-        <span class="shisha__wisp shisha__wisp--b"></span>
+    <div class="drinks__bubbles" aria-hidden="true">
+        <span class="drinks__bubble" style="left:10%; width:5px; height:5px;  --drift:16px;  animation-duration:9s;  animation-delay:0s;"></span>
+        <span class="drinks__bubble" style="left:22%; width:3px; height:3px;  --drift:-12px; animation-duration:11s; animation-delay:2s;"></span>
+        <span class="drinks__bubble" style="left:38%; width:6px; height:6px;  --drift:20px;  animation-duration:8s;  animation-delay:4s;"></span>
+        <span class="drinks__bubble" style="left:55%; width:4px; height:4px;  --drift:-18px; animation-duration:10s; animation-delay:1s;"></span>
+        <span class="drinks__bubble" style="left:70%; width:3px; height:3px;  --drift:14px;  animation-duration:12s; animation-delay:5s;"></span>
+        <span class="drinks__bubble" style="left:85%; width:5px; height:5px;  --drift:-16px; animation-duration:9.5s; animation-delay:3s;"></span>
+        <span class="drinks__bubble" style="left:94%; width:4px; height:4px;  --drift:18px;  animation-duration:10.5s; animation-delay:6s;"></span>
     </div>
 
-    <div class="shisha__header">
-        <span class="shisha__eyebrow">Shisha Bar</span>
-        <h2 class="shisha__title">Every Flavour, Every Night</h2>
-        <p class="shisha__subtitle">From smoky classics to fruit-forward blends, our hookah menu brings flavours from every corner of the world to the terrace.</p>
+    <div class="drinks__header">
+        <span class="drinks__eyebrow">Sip Something</span>
+        <h2 class="drinks__title">The Drinks List</h2>
+        <p class="drinks__subtitle">Mocktails, signature shisha buzz, and everything in between — straight off the Moishi menu.</p>
     </div>
 
-    <div class="shisha__filters" role="tablist" aria-label="Filter shisha flavours by category">
-        <button class="shisha__filter is-active" data-filter="all">All Flavours</button>
-        <button class="shisha__filter" data-filter="classic">Classic</button>
-        <button class="shisha__filter" data-filter="fruity">Fruity</button>
-        <button class="shisha__filter" data-filter="minty">Minty</button>
-        <button class="shisha__filter" data-filter="dessert">Dessert</button>
-        <button class="shisha__filter" data-filter="herbal">Herbal</button>
+    <div class="drinks__tabs" role="tablist" aria-label="Drinks categories">
+        <button class="drinks__tab is-active" data-tab="mocktails">Mocktails</button>
+        <button class="drinks__tab" data-tab="starbuzz">Starbuzz</button>
+        <button class="drinks__tab" data-tab="savacco">Savacco</button>
+        <button class="drinks__tab" data-tab="soft">Soft Drinks</button>
+        <button class="drinks__tab" data-tab="hot">Hot &amp; Tea</button>
     </div>
 
-    <div class="shisha__grid">
+    <div class="drinks__panel">
 
-        <div class="shisha__card" data-category="classic">
-            <img src="https://placehold.co/400x480/10261b/3ddc84?text=Double+Apple" alt="Double Apple shisha">
-            <span class="shisha__card-tag">Classic</span>
-            <span class="shisha__card-name">Double Apple</span>
+        <div class="drinks__panel-head">
+            <span class="drinks__panel-title" id="drinksPanelTitle">Moishi Mocktails</span>
+            <span class="drinks__panel-price" id="drinksPanelPrice">From £5.00</span>
         </div>
 
-        <div class="shisha__card" data-category="classic">
-            <img src="https://placehold.co/400x480/0e1512/f2ecd8?text=Turkish+Tobacco" alt="Turkish Tobacco shisha">
-            <span class="shisha__card-tag">Classic</span>
-            <span class="shisha__card-name">Turkish Tobacco</span>
-        </div>
+        <ul class="drinks__list is-active" data-list="mocktails">
+            <li class="drinks__item"><span class="drinks__item-name">Virgin Mojito</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£5.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Mango Mojito</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£5.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Strawberry Mojito</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£6.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Passionova Mojito</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£6.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Pina Colada</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£6.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Moishi Special</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£6.50</span></li>
+        </ul>
 
-        <div class="shisha__card" data-category="fruity">
-            <img src="https://placehold.co/400x480/1f4d38/f2ecd8?text=Grape" alt="Grape shisha">
-            <span class="shisha__card-tag">Fruity</span>
-            <span class="shisha__card-name">Purple Grape</span>
-        </div>
+        <ul class="drinks__list" data-list="starbuzz">
+            <li class="drinks__item"><span class="drinks__item-name">African Queen</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£16</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Dragon Breeze</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£16</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Mango Tango</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£16</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Skittles</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£16</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Cuban Mojito</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£16</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Moonlight Berry</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£16</span></li>
+        </ul>
 
-        <div class="shisha__card" data-category="fruity">
-            <img src="https://placehold.co/400x480/10261b/3ddc84?text=Watermelon" alt="Watermelon shisha">
-            <span class="shisha__card-tag">Fruity</span>
-            <span class="shisha__card-name">Watermelon</span>
-        </div>
+        <ul class="drinks__list" data-list="savacco">
+            <li class="drinks__item"><span class="drinks__item-name">Purple Rain</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£20</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Frozen SMF</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£20</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Manga Carta</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£20</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Picasso</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£20</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Black Mamba</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£20</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">G6 on the Rocks</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£20</span></li>
+        </ul>
 
-        <div class="shisha__card" data-category="fruity">
-            <img src="https://placehold.co/400x480/0e1512/f2ecd8?text=Mango" alt="Mango shisha">
-            <span class="shisha__card-tag">Fruity</span>
-            <span class="shisha__card-name">Golden Mango</span>
-        </div>
+        <ul class="drinks__list" data-list="soft">
+            <li class="drinks__item"><span class="drinks__item-name">Coke</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Sprite</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Fanta</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Irn Bru</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">J2O</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.50</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Mango Lussi</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.00</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Rubicon Range</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£1.50</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Mineral Water</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£1.50</span></li>
+        </ul>
 
-        <div class="shisha__card" data-category="fruity">
-            <img src="https://placehold.co/400x480/1f4d38/f2ecd8?text=Peach" alt="Peach shisha">
-            <span class="shisha__card-tag">Fruity</span>
-            <span class="shisha__card-name">Peach</span>
-        </div>
+        <ul class="drinks__list" data-list="hot">
+            <li class="drinks__item"><span class="drinks__item-name">Americano</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.75</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Cappuccino</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.75</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Caramel Macchiato</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.75</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Hot Chocolate</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.75</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">English Tea</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.50</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Mint Tea</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.50</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Desi Tea (Pot)</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£7.50</span></li>
+            <li class="drinks__item"><span class="drinks__item-name">Green Tea</span><span class="drinks__item-fill"></span><span class="drinks__item-price">£2.50</span></li>
+        </ul>
 
-        <div class="shisha__card" data-category="fruity">
-            <img src="https://placehold.co/400x480/10261b/3ddc84?text=Blueberry" alt="Blueberry shisha">
-            <span class="shisha__card-tag">Fruity</span>
-            <span class="shisha__card-name">Blueberry</span>
-        </div>
-
-        <div class="shisha__card" data-category="fruity">
-            <img src="https://placehold.co/400x480/0e1512/f2ecd8?text=Pineapple" alt="Pineapple shisha">
-            <span class="shisha__card-tag">Fruity</span>
-            <span class="shisha__card-name">Pineapple</span>
-        </div>
-
-        <div class="shisha__card" data-category="minty">
-            <img src="https://placehold.co/400x480/1f4d38/f2ecd8?text=Mint" alt="Mint shisha">
-            <span class="shisha__card-tag">Minty</span>
-            <span class="shisha__card-name">Cool Mint</span>
-        </div>
-
-        <div class="shisha__card" data-category="minty">
-            <img src="https://placehold.co/400x480/10261b/3ddc84?text=Lemon+Mint" alt="Lemon Mint shisha">
-            <span class="shisha__card-tag">Minty</span>
-            <span class="shisha__card-name">Lemon Mint</span>
-        </div>
-
-        <div class="shisha__card" data-category="minty">
-            <img src="https://placehold.co/400x480/0e1512/f2ecd8?text=Watermelon+Mint" alt="Watermelon Mint shisha">
-            <span class="shisha__card-tag">Minty</span>
-            <span class="shisha__card-name">Watermelon Mint</span>
-        </div>
-
-        <div class="shisha__card" data-category="dessert">
-            <img src="https://placehold.co/400x480/1f4d38/f2ecd8?text=Chocolate" alt="Chocolate shisha">
-            <span class="shisha__card-tag">Dessert</span>
-            <span class="shisha__card-name">Dark Chocolate</span>
-        </div>
-
-        <div class="shisha__card" data-category="dessert">
-            <img src="https://placehold.co/400x480/10261b/3ddc84?text=Coconut" alt="Coconut Cream shisha">
-            <span class="shisha__card-tag">Dessert</span>
-            <span class="shisha__card-name">Coconut Cream</span>
-        </div>
-
-        <div class="shisha__card" data-category="dessert">
-            <img src="https://placehold.co/400x480/0e1512/f2ecd8?text=Vanilla" alt="Vanilla shisha">
-            <span class="shisha__card-tag">Dessert</span>
-            <span class="shisha__card-name">Madagascar Vanilla</span>
-        </div>
-
-        <div class="shisha__card" data-category="herbal">
-            <img src="https://placehold.co/400x480/1f4d38/f2ecd8?text=Herbal+Mint" alt="Herbal Mint shisha (tobacco-free)">
-            <span class="shisha__card-tag">Herbal</span>
-            <span class="shisha__card-name">Herbal Mint <br><small style="opacity:.6;font-weight:400;">(Tobacco-Free)</small></span>
-        </div>
-
-        <div class="shisha__card" data-category="herbal">
-            <img src="https://placehold.co/400x480/10261b/3ddc84?text=Rose+Herbal" alt="Rose Herbal shisha (tobacco-free)">
-            <span class="shisha__card-tag">Herbal</span>
-            <span class="shisha__card-name">Rose Petal <br><small style="opacity:.6;font-weight:400;">(Tobacco-Free)</small></span>
-        </div>
-
+        <p class="drinks__more" id="drinksMoreNote">6 more mocktail flavours available in-store.</p>
     </div>
 
-    <div class="shisha__actions">
-        <a href="#reserve" class="shisha__cta">Order a Hookah</a>
+    <div class="drinks__actions">
+        <a href="#menu-full" class="drinks__cta">See Full Menu</a>
     </div>
 
 </section>
 
 <script>
-    /* ===== Lenis — smooth scroll for the whole page =====
-       If this section is dropped into a page that already runs Lenis
-       (e.g. in the nav script), remove this block to avoid a second instance. */
     (function () {
-        if (window.__lenisInitialized) return;
-        window.__lenisInitialized = true;
-
-        var lenis = new Lenis({
-            duration: 1.15,
-            easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-            smoothWheel: true,
-            touchMultiplier: 1.5
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            lenis.destroy();
-        }
-    })();
-
-    /* ===== Shisha section behaviour: reveal + filter pills ===== */
-    (function () {
-        var section = document.getElementById('shisha');
+        var section = document.getElementById('drinks');
         if (!section) return;
 
-        var cards = section.querySelectorAll('.shisha__card');
-
-        if (!('IntersectionObserver' in window)) {
-            section.classList.add('in-view');
-            cards.forEach(function (c) { c.classList.add('shisha-in'); });
-            return;
-        }
-
-        var sectionObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    section.classList.add('in-view');
-                    sectionObserver.disconnect();
-                }
-            });
-        }, { threshold: 0.08 });
-        sectionObserver.observe(section);
-
-        var cardObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('shisha-in');
-                    cardObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-        cards.forEach(function (c) { cardObserver.observe(c); });
-
-        // Filter pills
-        var filters = section.querySelectorAll('.shisha__filter');
-        filters.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                filters.forEach(function (b) { b.classList.remove('is-active'); });
-                btn.classList.add('is-active');
-
-                var category = btn.dataset.filter;
-                cards.forEach(function (card) {
-                    var match = category === 'all' || card.dataset.category === category;
-                    card.classList.toggle('is-hidden', !match);
-                    if (match && !card.classList.contains('shisha-in')) {
-                        // re-trigger a gentle pop-in if it was hidden before being seen
-                        requestAnimationFrame(function () { card.classList.add('shisha-in'); });
+        if ('IntersectionObserver' in window) {
+            var sectionObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        section.classList.add('in-view');
+                        sectionObserver.disconnect();
                     }
                 });
+            }, { threshold: 0.1 });
+            sectionObserver.observe(section);
+        } else {
+            section.classList.add('in-view');
+        }
+
+        var meta = {
+            mocktails: { title: 'Moishi Mocktails', price: 'From £5.00', more: '6 fresh mocktails, shaken to order.' },
+            starbuzz:  { title: 'Moishi Starbuzz', price: '£16 · +£2 per extra flavour', more: '6 more Starbuzz flavours available in-store.' },
+            savacco:   { title: 'Savacco', price: '£20', more: 'All 7 Savacco blends shown above.' },
+            soft:      { title: 'Soft Drinks', price: 'From £1.50', more: 'Full soft drinks range available at the counter.' },
+            hot:       { title: 'Hot Drinks & Tea', price: 'From £2.50', more: 'Ask about our pots of Green, Mint & Desi Tea.' }
+        };
+
+        var tabs = section.querySelectorAll('.drinks__tab');
+        var lists = section.querySelectorAll('.drinks__list');
+        var titleEl = document.getElementById('drinksPanelTitle');
+        var priceEl = document.getElementById('drinksPanelPrice');
+        var moreEl = document.getElementById('drinksMoreNote');
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                var key = tab.dataset.tab;
+
+                tabs.forEach(function (t) { t.classList.toggle('is-active', t === tab); });
+                lists.forEach(function (l) { l.classList.toggle('is-active', l.dataset.list === key); });
+
+                if (meta[key]) {
+                    titleEl.textContent = meta[key].title;
+                    priceEl.textContent = meta[key].price;
+                    moreEl.textContent = meta[key].more;
+                }
             });
         });
     })();
