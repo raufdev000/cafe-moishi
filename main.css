@@ -3397,7 +3397,7 @@ opacity: 30%;
     .desserts__scrim {
         position: absolute; inset: 0; z-index: -2;
         background:
-            radial-gradient(ellipse 800px 460px at 50% -5%, rgba(61,220,132,0.1), transparent 60%),
+            radial-gradient(ellipse 800px 460px at 50% -5%, rgba(1, 8, 109, 0.1), transparent 60%),
             linear-gradient(180deg, rgba(0, 0, 0, 0.411) 0%, rgba(0, 0, 0, 0.527) 55%, var(--void) 100%);
     }
 
